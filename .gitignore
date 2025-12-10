@@ -1,0 +1,9 @@
+# Ignore folders
+node_modules/
+.next/
+
+# Ignore env and config
+.env
+.env.local
+.env.*
+config.js
