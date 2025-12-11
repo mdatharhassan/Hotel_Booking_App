@@ -12,9 +12,13 @@ const authConfig = {
   secret: process.env.SECRET,
 
   callbacks: {
-    authorized({ auth, request }) {
-      return !!auth?.user;
+    // authorized({ auth, request }) {
+    //   return !!auth?.user;
+    // },
+    authorized({ auth }) {
+      return true; // allow login flow
     },
+
     async signIn({ user, account, profile }) {
       try {
         const existingGuest = await getGuest(user.email);
