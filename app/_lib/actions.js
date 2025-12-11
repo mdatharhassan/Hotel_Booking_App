@@ -1,4 +1,4 @@
-// "use server";
+"use server";
 
 import { ObjectId } from "mongodb";
 import { auth, signIn, signOut } from "./auth";
