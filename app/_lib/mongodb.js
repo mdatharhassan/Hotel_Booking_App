@@ -1,20 +1,40 @@
+// import { MongoClient } from "mongodb";
+
+// const MONGO_URL = process.env.MONGO_URL;
+
+// const client = new MongoClient(MONGO_URL);
+// async function connectToDatabase() {
+//   try {
+//     await client.connect();
+//     console.log("Connected successfully to server");
+//     const db = client.db("innsightDB");
+//   } catch (e) {
+//     console.error(e.message);
+//   } finally {
+//   }
+// }
+
+// connectToDatabase();
+
+// export const dbClient = client;
+// export const dbName = "innsightDB";
+
 import { MongoClient } from "mongodb";
 
-const MONGO_URL = process.env.MONGO_URL;
+const uri = process.env.MONGO_URL;
 
-const client = new MongoClient(MONGO_URL);
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log("Connected successfully to server");
-    const db = client.db("innsightDB");
-  } catch (e) {
-    console.error(e.message);
-  } finally {
-  }
+if (!uri) {
+  throw new Error("❌ Missing MONGO_URL in environment variables");
 }
 
-connectToDatabase();
+let client;
+let dbClient;
 
-export const dbClient = client;
-export const dbName = "innsightDB";
+// prevent creating many connections in dev hot reload
+if (!global._mongoClientPromise) {
+  client = new MongoClient(uri);
+  global._mongoClientPromise = client.connect();
+}
+dbClient = global._mongoClientPromise;
+
+export default dbClient;
