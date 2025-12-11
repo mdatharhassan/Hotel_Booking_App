@@ -37,6 +37,7 @@ export async function updateGuest(formData) {
   revalidatePath("/account/profile");
 }
 export async function createBooking(bookingData, formData) {
+  console.log(bookingData);
   bookingData = {
     ...bookingData,
     startDate: new Date(`${bookingData.startDate}T00:00:00.000Z`),
@@ -61,7 +62,6 @@ export async function createBooking(bookingData, formData) {
     status: "unconfirmed",
     created_at: new Date(),
   };
-  console.log(newBooking);
 
   const client = await dbClient;
   try {
