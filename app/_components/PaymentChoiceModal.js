@@ -79,6 +79,8 @@ export default function PaymentChoiceModal({
   };
 
   const handlePayOnArrival = async () => {
+    console.log("data", normalizedBookingData);
+
     try {
       await createBooking(normalizedBookingData, fillData);
       bookingallData.resetRange();
