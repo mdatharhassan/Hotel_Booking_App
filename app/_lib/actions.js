@@ -37,7 +37,6 @@ export async function updateGuest(formData) {
   revalidatePath("/account/profile");
 }
 export async function createBooking(bookingData, formData) {
-  console.log("BookingDatacreate:", bookingData);
   bookingData = {
     ...bookingData,
     startDate: new Date(`${bookingData.startDate}T00:00:00.000Z`),
@@ -45,6 +44,7 @@ export async function createBooking(bookingData, formData) {
   };
   let guestId;
   const session = await auth();
+  console.log("sessionmine", session);
 
   if (!session) throw new Error("You must be logged in");
   guestId = session.user.guestId;
@@ -62,6 +62,7 @@ export async function createBooking(bookingData, formData) {
     status: "unconfirmed",
     created_at: new Date(),
   };
+  console.log("newBook", newBooking);
 
   const client = await dbClient;
   try {
