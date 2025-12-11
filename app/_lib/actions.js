@@ -61,6 +61,8 @@ export async function createBooking(bookingData, formData) {
     status: "unconfirmed",
     created_at: new Date(),
   };
+  console.log(newBooking);
+
   const client = await dbClient;
   try {
     const result = await client
