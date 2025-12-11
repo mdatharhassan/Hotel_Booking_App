@@ -37,6 +37,7 @@ export async function updateGuest(formData) {
   revalidatePath("/account/profile");
 }
 export async function createBooking(bookingData, formData) {
+  console.log("BookingDatacreate:", bookingData);
   bookingData = {
     ...bookingData,
     startDate: new Date(`${bookingData.startDate}T00:00:00.000Z`),
